@@ -1,5 +1,6 @@
 `timescale 1ns/1ps
 
+`include "src/types.svh"
 `include "test/utils.svh"
 
 import pkg_control_fsm::*;
@@ -7,7 +8,7 @@ import pkg_control_fsm::*;
 module rf_tb;
 
   //DUT inputs
-  logic [4:0] Addr1, Addr2, Addr3;
+  reg_t Addr1, Addr2, Addr3;
   logic clk;
   logic regWrite;
   logic [31:0] dataIn;

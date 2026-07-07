@@ -12,7 +12,7 @@ module Logger
 , input wire [6:0] opcode
 , input logic [2:0] funct3
 , input logic [6:0] funct7
-, input logic [4:0] rs1, rs2, rd
+, input reg_t rs1, rs2, rd
 , input imm_t imm_ext
 , input addr_t memory_address
 , input data_t memory_data
@@ -249,16 +249,16 @@ module Logger
         end
 
         // Display values read from register file
-        if (rs1 != 5'b00000) begin
+        if (rs1 != '0) begin
         $display("Read Register: %s", source_register1, " Value: 0x%08h", rd1);
         end
 
-        if (rs2 != 5'b00000) begin
+        if (rs2 != '0) begin
         $display("Read Register: %s", source_register2, " Value: 0x%08h", rd2);
         end
 
         // If data is being written to register, display what and where
-        if (regWrite && rd != 5'b00000) begin
+        if (regWrite && rd != '0) begin
         $display("Write Register: %s", destination_register, " Value: 0x%08h", result);
         end
 

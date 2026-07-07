@@ -1,10 +1,11 @@
+`include "src/types.svh"
 `include "src/ext/b/types.svh"
 
 module ext__b__decoder
   ( input [2:0] funct3
   , input [6:0] funct7
   , input [6:0] opcode
-  , input [4:0] rd
+  , input reg_t rd
   , output ext__b__types::b_alu_control_t b_alu_control
   );
 

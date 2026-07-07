@@ -1,3 +1,5 @@
+`include "src/types.svh"
+
 //Created by Joonseo Park
 //The register file holds the source and destination registers specified by instruction fields
 
@@ -9,9 +11,9 @@
 //rd --> a register inside RF memory, holding address of register to be written into
 
 module registerFile
-  ( input [4:0] Addr1 //rs1 field (holds addr of one of 32 registers) - first source register
-  , input [4:0] Addr2 //rs2 field - second source register (holds data to be stored)
-  , input [4:0] Addr3 //rd field - desination register
+  ( input reg_t Addr1 //rs1 field (holds addr of one of 32 registers) - first source register
+  , input reg_t Addr2 //rs2 field - second source register (holds data to be stored)
+  , input reg_t Addr3 //rd field - desination register
   , input clk
   , input regWrite
   , input [31:0] dataIn
@@ -26,10 +28,10 @@ module registerFile
   reg [31:0] RFMem [0:31] /* synthesis ramstyle = M10K*/;
 
   // x0 always 0, read out 32-bit contents of rs1 register
-  assign baseAddr  = (Addr1 == 5'd0) ? 32'd0 : RFMem[Addr1];
+  assign baseAddr  = (Addr1 == '0) ? 32'd0 : RFMem[Addr1];
 
   // x0 always 0 on read, read out 32-bit contents of rs2 register
-  assign writeData = (Addr2 == 5'd0) ? 32'd0 : RFMem[Addr2];
+  assign writeData = (Addr2 == '0) ? 32'd0 : RFMem[Addr2];
 
   always @(posedge clk) begin
 
@@ -42,7 +44,7 @@ module registerFile
 `else
       RFMem[0] <= 32'b0;
 `endif
-    end else if (regWrite && Addr3 != 0) begin
+    end else if (regWrite && Addr3 != '0) begin
       RFMem[Addr3] <= dataIn; //write into destination register if RegWrite = 1
 
     end

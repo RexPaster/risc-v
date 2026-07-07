@@ -53,7 +53,7 @@ module utoss_riscv
   wire [1:0] __tmp_ResultSrc;
   state_t __tmp_FSMState;
   data_t     dataA, dataB;
-  reg  [4:0] rd, rs1, rs2;
+  reg_t rd, rs1, rs2;
 
   logic [3:0] MemWriteByteAddress;
 
